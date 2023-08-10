@@ -8,6 +8,7 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [add, setAdd] = useState(false);
 
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
@@ -52,7 +53,9 @@ function App() {
     });
     const data = await response.json();
     console.log(data);
+    setAdd(prev=>!prev);
   }
+  useEffect(()=>{fetchMoviesHandler();},[add]);
 
   let content = <p>Found no movies.</p>;
 
